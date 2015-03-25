@@ -1,0 +1,7 @@
+.classpath
+/.gradle/
+/.settings/
+.project
+rebel.xml
+/core/build/
+/core/.settings/
