@@ -1,8 +1,51 @@
+import groovy.xml.MarkupBuilder
+
+def environment = hasProperty('env') ? env : 'dev'
+println "Target environment: $environment"
+
+copy {
+	from "src/main/environment/$environment"
+	into "src/main/resources"
+	include "*/"
+}
+
 apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'ear'
  
 jar {
     baseName = 'core-services'
     version =  '0.1.0'
+}
+
+eclipse {
+	wtp {
+		facet {
+			facet name:'jpt.jpa', version:'2.1'
+			facet name:'jst.java', version:'1.7'
+		}
+		File prefsFile = file('.settings/org.eclipse.jpt.core.prefs')
+		prefsFile.parentFile.mkdirs()
+		prefsFile.write('eclipse.preferences.version=1\n')
+		prefsFile.append('org.eclipse.jpt.core.platform=generic2_1\n')
+		prefsFile.append('org.eclipse.jpt.jpa.core.discoverAnnotatedClasses=true')
+		def writer = new StringWriter()
+		def xml = new MarkupBuilder(writer)
+		xml.root() {
+			facet(id:'jpt.jpa') {
+				node(name:'libprov') {
+					attribute(name:'provider-id', value:'jpa-no-op-library-provider')
+				}
+			}
+		}
+		prefsFile = file('.settings/org.eclipse.wst.common.project.facet.core.prefs.xml')
+		prefsFile.write(writer.toString());
+		
+		File resourcePrefs = file('.settings/org.eclipse.core.resources.prefs')
+		resourcePrefs.parentFile.mkdirs()
+		resourcePrefs.write('eclipse.preferences.version=1\n')
+		resourcePrefs.append('encoding/<project>=UTF-8\n')
+	}
 }
 
 dependencies {
