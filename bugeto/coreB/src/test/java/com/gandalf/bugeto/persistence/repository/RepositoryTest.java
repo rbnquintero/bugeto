@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gandalf.bugeto.config.PersistenceConfig;
+import com.gandalf.bugeto.config.ServiceConfig;
 import com.gandalf.bugeto.config.SpringConfig;
 import com.gandalf.bugeto.persistence.domain.MovCategory;
 import com.gandalf.bugeto.persistence.domain.Movimiento;
@@ -21,7 +22,7 @@ import com.gandalf.bugeto.persistence.domain.User;
 import com.gandalf.bugeto.persistence.domain.UserBalance;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { PersistenceConfig.class, SpringConfig.class })
+@ContextConfiguration(classes = { PersistenceConfig.class, SpringConfig.class, ServiceConfig.class })
 public class RepositoryTest {
 	private static final Logger _log = LoggerFactory.getLogger(RepositoryTest.class);
 
@@ -47,7 +48,7 @@ public class RepositoryTest {
 
 	@Test
 	@Transactional
-//	@Rollback(false)
+	// @Rollback(false)
 	public void MovTest() {
 		User user = userRepository.findUserByUsername("rbnquintero@yahoo.com");
 		UserBalance userBalance = new UserBalance(0.0, user);

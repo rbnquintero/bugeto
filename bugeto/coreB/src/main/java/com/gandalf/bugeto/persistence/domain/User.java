@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -27,6 +28,15 @@ public class User implements Serializable {
 
 	@Column(name="username")
 	private String userUsername;
+	
+	@Column(name="\"status\"")
+	private Long userStatus;
+	
+	@Column(name="\"fechaCreacion\"")
+	private Date userFechaCreacion;
+	
+	@Column(name="\"token\"")
+	private String userToken;
 
 	//bi-directional many-to-one association to Movimiento
 	@OneToMany(mappedBy="user")
@@ -43,6 +53,11 @@ public class User implements Serializable {
 
 	public User() {
 	}
+
+    public User(String username, String password) {
+        this.userUsername = username;
+        this.userPassword = password;
+    }
 
 	public Long getUserId() {
 		return this.userId;
@@ -66,6 +81,30 @@ public class User implements Serializable {
 
 	public void setUserUsername(String userUsername) {
 		this.userUsername = userUsername;
+	}
+	
+	public Long getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(Long userStatus) {
+		this.userStatus = userStatus;
+	}
+	
+	public Date getUserFechaCreacion() {
+		return userFechaCreacion;
+	}
+
+	public void setUserFechaCreacion(Date userFechaCreacion) {
+		this.userFechaCreacion = userFechaCreacion;
+	}
+	
+	public String getUserToken() {
+		return userToken;
+	}
+
+	public void setUserToken(String userToken) {
+		this.userToken = userToken;
 	}
 
 	public List<Movimiento> getMovimientos() {

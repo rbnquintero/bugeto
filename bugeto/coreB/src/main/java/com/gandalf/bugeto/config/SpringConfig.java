@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 import com.gandalf.bugeto.util.Properties;
 
 @Configuration
-@ComponentScan({ "com.gandalf.bugeto.service.impl" })
+@ComponentScan({ "com.gandalf.bugeto.service.impl", "com.gandalf.bugeto.business.impl" })
 @PropertySource(value = { "classpath:application.properties", "classpath:environment.properties" })
 public class SpringConfig {
 	@Bean
@@ -22,4 +22,5 @@ public class SpringConfig {
 	public SimpleDateFormat dateFormat(){
 		return new SimpleDateFormat("dd-MM-yyyy");
 	}
+	
 }

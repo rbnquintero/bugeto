@@ -52,6 +52,9 @@ public class Movimiento implements Serializable {
 	@OneToOne
 	@JoinColumn(name="\"movBalance\"")
 	private UserBalance userBalance;
+	
+	@Column(name="\"cuentaId\"")
+	private Long movCuentaId;
 
 	public Movimiento() {
 	}
@@ -118,6 +121,14 @@ public class Movimiento implements Serializable {
 
 	public void setUserBalance(UserBalance userBalance) {
 		this.userBalance = userBalance;
+	}
+	
+	public Long getMovCuentaId() {
+		return movCuentaId;
+	}
+
+	public void setMovCuentaId(Long movCuentaId) {
+		this.movCuentaId = movCuentaId;
 	}
 
 }

@@ -7,7 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.gandalf.bugeto.persistence.domain.User;
 
-public interface UserRepository extends PagingAndSortingRepository<User, Long> {
+public interface UserRepository extends PagingAndSortingRepository<User, Long>, UserRepositoryCustom {
 
 	@Query("from User")
 	public List<User> findAllUsers();

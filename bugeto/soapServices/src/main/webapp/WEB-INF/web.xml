@@ -1,0 +1,51 @@
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>bugeto SOAP Services</display-name>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/spring/mvc-config.xml
+		</param-value>
+	</context-param>
+	
+	<!-- Spring MVC -->
+	<servlet>
+		<servlet-name>jaxws-servlet</servlet-name>
+		<servlet-class>
+			com.sun.xml.ws.transport.http.servlet.WSSpringServlet
+		</servlet-class>
+  	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>jaxws-servlet</servlet-name>
+		<url-pattern>/perfilWService</url-pattern>
+	</servlet-mapping>
+	
+    <!-- Register Spring Listener -->
+  	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+  	</listener>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+
+	<!-- End of Spring Security -->
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error</location>
+	</error-page>
+
+	<error-page>
+		<error-code>405</error-code>
+		<location>/error</location>
+	</error-page>
+</web-app>

@@ -1,0 +1,15 @@
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war'
+
+dependencies {
+	compile group:'log4j', name:'log4j', version:'1.2.16'
+	compile group:'org.slf4j', name:'slf4j-log4j12', version:'1.7.7'
+	compile 'commons-validator:commons-validator:1.4.1'
+	//Spring
+	compile 'org.springframework:spring-core:4.0.4.RELEASE'
+	compile 'org.springframework:spring-context:4.0.4.RELEASE'
+	compile 'org.jvnet.jax-ws-commons.spring:jaxws-spring:1.9'
+	runtime 'org.springframework:spring-webmvc:4.0.4.RELEASE'
+	compile 'javax.servlet:servlet-api:2.5'
+	compile project(':coreB')
+}
